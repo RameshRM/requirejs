@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+    <relativePath />
+  </parent>
+
+  <groupId>net.jangaroo.org.requirejs</groupId>
+  <artifactId>requirejs</artifactId>
+  <name>RequireJS</name>
+  <version>2.0.1-SNAPSHOT</version>
+
+  <description>Maven-packaged version of RequireJS 2.0.1, provided by Jangaroo</description>
+  <url>http://github.com/jrburke/requirejs</url>
+
+  <organization>
+    <name>The Dojo Foundation</name>
+    <url>http://requirejs.org</url>
+  </organization>
+
+  <developers>
+    <developer>
+      <name>James Burke</name>
+      <url>https://github.com/jrburke</url>
+    </developer>
+  </developers>
+
+  <licenses>
+    <license>
+      <url>https://github.com/jrburke/requirejs/blob/master/LICENSE</url>
+    </license>
+  </licenses>
+
+  <scm>
+    <url>http://github.com/CoreMedia/requirejs</url>
+    <connection>scm:git:git://github.com/CoreMedia/requirejs.git</connection>
+    <developerConnection>scm:git:git@github.com:CoreMedia/requirejs.git</developerConnection>
+  </scm>
+
+  <properties>
+    <requirejs.version>2.0.1</requirejs.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
+  <prerequisites>
+    <maven>3.0.3</maven>
+  </prerequisites>
+
+  <profiles>
+    <profile>
+      <id>release-signing</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.1</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles> 
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/original</directory>
+        <targetPath>META-INF/resources/requirejs</targetPath>
+        <includes>
+          <include>*.js</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/original</directory>
+        <includes>
+          <include>*.txt</include>
+        </includes>
+      </resource>
+    </resources>
+
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh</artifactId>
+        <version>1.0-beta-6</version>
+      </extension>
+    </extensions>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-scm-plugin</artifactId>
+          <version>1.4</version>
+          <configuration>
+            <pushChanges>false</pushChanges>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.5</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.3.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>2.4.3</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>2.4.1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+  </build>
+
+</project>
